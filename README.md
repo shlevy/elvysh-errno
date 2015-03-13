@@ -32,4 +32,4 @@ considered closed".
 If it ends up being useful frequently, a prfun to explicitly ignore an error may
 be added as well.
 
-[1] https://github.com/shlevy/elvysh-main
+[1]: https://github.com/shlevy/elvysh-main
