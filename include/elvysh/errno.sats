@@ -15,8 +15,8 @@ datasort errno_state = free
                      | set
 
 (* View gating access to errno. Note that the initial creation and final
- * consumption of errno_v should be handled by the set_posix_main macro
- * in elvysh-main, or something similar, and from then on should be threaded
+ * consumption of errno_v should be handled by the posix-main.hats in
+ * elvysh-main, or something similar, and from then on should be threaded
  * through functions called from main
  *)
 absview errno_v ( errno_state )
