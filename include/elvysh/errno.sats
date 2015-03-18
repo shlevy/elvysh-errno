@@ -29,6 +29,11 @@ fun get_errno ( ev: !errno_v ( set ) >> errno_v ( free ) ): int
 fun set_errno ( ev: !errno_v ( free ) >> errno_v ( set ) | value: int ): void
   = "mac#%"
 
+(* View for the common case of a function returning -1 IFF it sets errno *)
+dataview neg1_errno ( res: int ) =
+  | { i: int | i != ~1 } neg1_errno_free ( i ) of ( errno_v ( free ) )
+  | { i: int | i == ~1 } neg1_errno_set ( i ) of ( errno_v ( set ) )
+
 %{#
 #include <errno.h>
 #define elvysh_errno_get_errno() errno
