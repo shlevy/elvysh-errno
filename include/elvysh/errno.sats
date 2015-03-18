@@ -29,7 +29,14 @@ fun get_errno ( ev: !errno_v ( set ) >> errno_v ( free ) ): int
 fun set_errno ( ev: !errno_v ( free ) >> errno_v ( set ) | value: int ): void
   = "mac#%"
 
-(* View for the common case of a function returning -1 IFF it sets errno *)
+(* View for the common case of a function returning -1 IFF it sets errno.
+ *
+ * ctors:
+ * neg1_errno_free: The result was *not* negative 1, constructed from an
+ *   errno_v ( free ), no need to check errno
+ * neg1_errno_set: The result was negative 1, constructed from an
+ * errno_v ( set ), need to check errno
+ *)
 dataview neg1_errno ( res: int ) =
   | { i: int | i != ~1 } neg1_errno_free ( i ) of ( errno_v ( free ) )
   | { i: int | i == ~1 } neg1_errno_set ( i ) of ( errno_v ( set ) )
